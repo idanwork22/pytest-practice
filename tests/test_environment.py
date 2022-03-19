@@ -1,3 +1,7 @@
+from pytest import mark
+
+
+@mark.skip(reason="broken by deploy some number")
 def test_environment_is_qa(app_config):
     base_url = app_config.base_url
     port = app_config.app_port
@@ -12,6 +16,7 @@ def test_environment_is_dev(app_config):
     assert port == 8080
 
 
+@mark.xfail(reason="Env was not staging")
 def test_environment_is_staging(app_config):
     base_url = app_config.base_url
     port = app_config.app_port
